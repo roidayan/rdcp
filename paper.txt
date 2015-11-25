@@ -1,0 +1,125 @@
+server:
+
+queue = 100
+
+pool 100 (of size 5)
+post_recv 100 pool_item_id
+
+event completion:
+  if completion < 50
+	post_recv 100 - completions
+
+
+
+client:
+
+size 1000 / 5 = 200  = total sends
+
+loop:
+   post_send
+
+
+---------------------
+
+s: rdma listen
+s: connected
+s: create qp
+s: post recv metadata
+s: post recv multi rdma_info
+c: create qp
+c: post recv
+c: connect s
+c: post send metadata
+loop:
+-c: post send addr+key
+-s: rdma read from c addr+key
+-s: post send read ok
+c: post send done (TODO: set last buf flag in last post_send)
+c: disconnect
+
+
+-------------
+send_tasks 100
+recv_tasks 100
+
+s: post recv 100
+c: post recv 100
+c: while have send_tasks: allocate task + read file to buffer + post send task
+s: recv event: rdma read + post send done with task id
+   post recv
+   rdma read complete: write buffer to file, free buffer
+   send complete: ?
+c: recv event: free send_task
+   post recv
+
+
+
+method 1
+
+sqA.buf=1 sqB.buf=2 sqC.buf=3
+
+c: post send sqA sqB sqC (buf + id)
+s: recv rqA.buf=1 rqB.buf=2 rqC.buf=3 -> add rr_task
+s: rdma read 1 2 3 (from rr_task_list)
+s: post send s.q1 sq.2 sq.3 (buf + id)
+c: recv completion rq.1 rq.2 rq.3 (buf + id)
+   send_tasks (id id id)
+   free_task(&send_task[id])
+
+
+method 2
+
+buf 1 2 3
+sq
+rq
+
+c: post send sq.1 sq.2 sq.3
+s: post recc 1 2 3
+c: send completion sq sq sq. free send tasks sq sq sq
+s: rdma read
+s: post send done 1 2 3
+c: post recv 1 2 3. free bufs 1 2 3
+
+
+c: while can_send (note: have send task + have free buffer)
+
+
+
+---
+
+client
+post send
+wait - recv completion
+post send
+wait - recv completion
+post send
+
+
+
+
+------------1-------------
+multiple post_send
+wait
+-------2------------
+event send_comp: free send_task
+event recv_comp: sem_post
+
+
+
+--------------------
+step1
+get_event
+step2
+get_event
+
+
+-----------------
+c: post recv md
+c: post recv 16 tasks
+
+send_tasks
+c: post send 16 tasks
+c: wait. on each wc_recv do post recv
+goto send_tasks
+
+

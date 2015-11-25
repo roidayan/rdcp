@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<refentry id="rdcp.8">
+
+<info>
+        <author>
+            <personname>
+                Roi Dayan, Slava Shwartsman
+            </personname>
+        </author>
+</info>
+
+<refmeta>
+	<refentrytitle>rdcp</refentrytitle>
+	<manvolnum>8</manvolnum>
+        <refmiscinfo>rdcp commands</refmiscinfo>
+</refmeta>
+
+
+<refnamediv>
+	<refname>rdcp</refname>
+	<refpurpose>Remote Data Copy (rdma file copy program)</refpurpose>
+</refnamediv>
+
+<refsynopsisdiv>
+	<cmdsynopsis>
+		<command>rdcp</command>
+		<arg choice="opt">-s</arg>
+		<arg choice="opt">-t</arg>
+		<arg choice="opt">-v</arg>
+		<arg choice="opt">-p &lt;PORT&gt;</arg>
+		<arg choice="opt">-h</arg>
+		<arg choice="plain">file1</arg>
+		<arg choice="plain">host2:file2</arg>
+	</cmdsynopsis>
+	
+</refsynopsisdiv>
+
+  <refsect1><title>DESCRIPTION</title>
+    <para>
+      rdcp copies files between hosts over rdma capable network. This utility
+      can be used to copy large files between hosts and is substantially faster
+      than using traditional copy utilities that use the TCP protocol, like
+      rcp, scp, ftp.
+    </para>
+  </refsect1>
+
+  <refsect1>
+    <title>OPTIONS</title>
+
+    <variablelist>
+      <varlistentry><term>-s</term>
+        <listitem>
+          <para>
+            server mode.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry><term>-t</term>
+        <listitem>
+          <para>
+            null device.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry><term>-v</term>
+        <listitem>
+          <para>
+            verbose mode.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry><term>-p &lt;PORT&gt;</term>
+        <listitem>
+          <para>
+            Specify port.
+          </para>
+        </listitem>
+      </varlistentry>
+
+      <varlistentry><term>-h</term>
+        <listitem>
+          <para>
+            Print help text to the screen.
+          </para>
+        </listitem>
+      </varlistentry>
+
+    </variablelist>
+  </refsect1>
+
+
+  <refsect1><title>COPYRIGHT/LICENSE</title>
+<literallayout>
+Copyright (c) 2015 Roi Dayan, Slava Shwartsman.
+
+This software is available to you under a choice of one of two
+licenses.  You may choose to be licensed under the terms of the GNU
+General Public License (GPL) Version 2, available from the file
+COPYING in the main directory of this source tree, or the
+OpenIB.org BSD license below:
+
+    Redistribution and use in source and binary forms, with or
+    without modification, are permitted provided that the following
+    conditions are met:
+
+     - Redistributions of source code must retain the above
+       copyright notice, this list of conditions and the following
+       disclaimer.
+
+     - Redistributions in binary form must reproduce the above
+       copyright notice, this list of conditions and the following
+       disclaimer in the documentation and/or other materials
+       provided with the distribution.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+</literallayout>
+  </refsect1>
+</refentry>
