@@ -241,8 +241,7 @@ static int rdcp_cma_event_handler(struct rdma_cm_id *cma_id,
 			cb->server ? "server" : "client");
 		cb->state = DISCONNECTED;
 		// TODO nooo
-		if (cb->fd)
-			syncfs(cb->fd);
+		sync();
 		sem_post(&cb->sem);
 		break;
 
