@@ -241,8 +241,7 @@ static int rdcp_cma_event_handler(struct rdma_cm_id *cma_id,
 			cb->server ? "server" : "client");
 		cb->state = DISCONNECTED;
 		// TODO nooo
-		if (cb->fd)
-			syncfs(cb->fd);
+		sync();
 		sem_post(&cb->sem);
 		break;
 
@@ -292,8 +291,9 @@ static int server_open_dest(struct rdcp_cb *cb)
 			basename(cb->metadata.src_path));
 	} else if (ENOENT == errno) {
 		// ok. create a file.
+	} else if (ENOTDIR == errno){
+		// ok. It's not a dir. overwrite
 	} else {
-		// do not override files
 		perror("open error");
 		return errno;
 	}
@@ -304,7 +304,7 @@ static int server_open_dest(struct rdcp_cb *cb)
 	fflush(stdout);
 
 	cb->fd = open(cb->metadata.dst_path,
-			O_RDWR | O_CREAT,
+			O_WRONLY | O_CREAT | O_TRUNC,
 			S_IRUSR | S_IWUSR);
 	if (cb->fd < 0) {
 		perror("failed to open file");
