@@ -8,7 +8,7 @@ Packager:       Slava Shwartsman <valyushash@gmail.com>, Roi Dayan <roi.dayan@gm
 Group:          System Environment/Daemons
 License:        GPLv2
 URL:            https://github.com/roidayan/rdcp
-Source0:        %{name}-%{version}-%{release}.tgz
+Source0:        %{name}-%{version}.tgz
 BuildRoot:      %{_tmppath}/%{name}-%{version}-%{release}-root-%(%{__id_u} -n)
 BuildRequires:  pkgconfig libibverbs-devel librdmacm-devel libxslt
 %if %{defined suse_version}
@@ -37,7 +37,7 @@ requires pre-configuration of target and initiators.
 
 
 %prep
-%setup -q -n %{name}-%{version}-%{release}
+%setup -q
 
 
 %build
