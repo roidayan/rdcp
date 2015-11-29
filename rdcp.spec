@@ -1,3 +1,5 @@
+%define debug_package %{nil}
+
 Name:           rdcp
 Version:        0.1
 Release:        2%{?dist}
