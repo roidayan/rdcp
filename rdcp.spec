@@ -44,5 +44,5 @@ export CFLAGS="%{optflags}"
 %{_mandir}/man8/rdcp.8*
 
 %changelog
-* Tue Dec 01 2015 Roi Dayan <roi dot dayan at gmail.com> - 0.1-2
+* Tue Dec 01 2015 Roi Dayan <roi.dayan@gmail.com> - 0.1-2
 - first package.
