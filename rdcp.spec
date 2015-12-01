@@ -4,7 +4,7 @@ Release:        2%{?dist}
 Summary:        Remote Data Copy (RDMA file copy program)
 License:        GPLv2 or OpenIB.org BSD
 URL:            https://github.com/roidayan/rdcp
-Source0:        %{name}-%{version}.tgz
+Source0:        https://github.com/roidayan/rdcp/archive/rdcp-%{version}.tar.gz
 BuildRequires:  pkgconfig libibverbs-devel librdmacm-devel libxslt docbook-style-xsl
 
 %description
