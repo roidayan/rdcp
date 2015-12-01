@@ -1,7 +1,5 @@
-CC = gcc
-CFLAGS = -ggdb
-# -Wall
-LDFLAGS = -libverbs -lrdmacm -lpthread
+CFLAGS += -Wall
+LDFLAGS += -libverbs -lrdmacm -lpthread
 XSLTPROC = /usr/bin/xsltproc
 
 all: rdcp rdcp.8
