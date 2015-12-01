@@ -37,6 +37,7 @@ export CFLAGS="%{optflags}"
 %{__install} -p -m 0644 rdcp.8 %{buildroot}/%{_mandir}/man8
 
 %files
+%{!?_licensedir:%global license %doc}
 %doc README.md paper.txt
 %license COPYING
 %{_bindir}/rdcp
