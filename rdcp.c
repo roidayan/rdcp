@@ -608,7 +608,7 @@ static void rdcp_free_buffers(struct rdcp_cb *cb)
 	int i;
 
 	VERBOSE_LOG(3, "rdcp_free_buffers called on cb %p\n", cb);
-	if (cb->start_buf);
+	if (cb->start_buf)
 		free(cb->start_buf);
 	if (cb->rdma_mr)
 		ibv_dereg_mr(cb->rdma_mr);
