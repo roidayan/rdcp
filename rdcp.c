@@ -628,7 +628,6 @@ static void rdcp_free_buffers(struct rdcp_cb *cb)
 		ibv_dereg_mr(cb->metadata_mr);
 //	if (!cb->server) {
 		ibv_dereg_mr(cb->start_mr);
-		free(cb->start_buf);
 //	}
 }
 
