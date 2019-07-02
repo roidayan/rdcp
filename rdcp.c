@@ -1240,6 +1240,16 @@ static int rdcp_run_client(struct rdcp_cb *cb)
 	struct ibv_recv_wr *bad_wr;
 	int i, ret;
 
+	if (!cb->use_null) {
+		int fd = open(cb->metadata.src_path, O_RDONLY);
+
+		close(fd);
+		if (fd < 0) {
+			perror("failed to open source file");
+			return errno;
+		}
+	}
+
 	ret = rdcp_bind_client(cb);
 	if (ret)
 		return ret;
