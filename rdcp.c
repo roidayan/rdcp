@@ -1179,7 +1179,7 @@ static int rdcp_test_client(struct rdcp_cb *cb)
 	VERBOSE_LOG(1, "done\n");
 
 out:
-	fclose(cb->fp);
+	// fclose(cb->fp);
 	cb->fd = -1;
 
 	return (cb->state == DISCONNECTED) ? 0 : ret;
