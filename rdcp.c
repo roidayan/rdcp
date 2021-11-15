@@ -1090,6 +1090,7 @@ static int rdcp_test_client(struct rdcp_cb *cb)
 	struct ibv_send_wr *bad_wr;
 	int size;
 	long total_size = 0;
+	struct stat filebuf;
 
 	if (!cb->use_null) {
 		cb->fd = open(cb->metadata.src_path, O_RDONLY);
@@ -1098,14 +1099,17 @@ static int rdcp_test_client(struct rdcp_cb *cb)
 		    perror("Couldn't open file");
 		    goto out;
 		}
-		cb->fp = fdopen(cb->fd, "rb");
-		fseek(cb->fp, 0, SEEK_END);
-		cb->metadata.size = ftell(cb->fp);
+		// cb->fp = fdopen(cb->fd, "rb");
+		// fseek(cb->fp, 0, SEEK_END);
+		// cb->metadata.size = ftell(cb->fp);
+		stat(cb->metadata.src_path, &filebuf);
+		cb->metadata.size = filebuf.st_size;
+
 		if (cb->metadata.size <= 0) {
 			perror("size error");
 			goto out;
 		}
-		fseek(cb->fp, 0, SEEK_SET);
+		// fseek(cb->fp, 0, SEEK_SET);
 	} else {
 		cb->metadata.size = 0;
 	}
